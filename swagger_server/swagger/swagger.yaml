@@ -37,6 +37,30 @@ paths:
         "409":
           description: "already exists"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /student/:
+    get:
+      summary: "Find student by last name"
+      description: "Returns a single student"
+      operationId: "get_student_by_last_name"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "last_name"
+        in: "query"
+        description: "The last name"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Student"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "student not found"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
   /student/{student_id}:
     get:
       summary: "Find student by ID"
@@ -46,17 +70,17 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "subject"
-        in: "query"
-        description: "The subject name"
-        required: false
-        type: "string"
       - name: "student_id"
         in: "path"
         description: "ID of student to return"
         required: true
         type: "integer"
         format: "int64"
+      - name: "subject"
+        in: "query"
+        description: "The subject name"
+        required: false
+        type: "string"
       responses:
         "200":
           description: "successful operation"
@@ -96,18 +120,19 @@ definitions:
     properties:
       student_id:
         type: "integer"
+        format: "int64"
       first_name:
         type: "string"
       last_name:
         type: "string"
       grades:
-        type: "array"
-        items:
-          type: "integer"
+        type: "object"
+        additionalProperties:
+          type: "object"
+          properties: {}
     example:
       student_id: 0
       last_name: "last_name"
       grades:
-      - 6
-      - 6
+        key: "{}"
       first_name: "first_name"
