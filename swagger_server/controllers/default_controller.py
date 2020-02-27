@@ -3,9 +3,8 @@ import six
 
 from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
-from swagger_server.service import student_service
+from swagger_server import student_service
 
-import sys
 
 def add_student(body):  # noqa: E501
     """Add a new student
@@ -54,19 +53,4 @@ def get_student_by_id(student_id, subject=None):  # noqa: E501
     if res:
         return res
     return 'Not Found', 404
-    
-def get_student(last_name):
-    """Find student by last name
 
-    Returns a single student # noqa: E501
-
-    :param last_name: last name of student to return
-    :type last_name: str
-
-    :rtype: Student
-    """
-    print(last_name, file=sys.stderr)
-    res = student_service.get_student(last_name)
-    if res:
-        return res
-    return 'Not Found', 404
