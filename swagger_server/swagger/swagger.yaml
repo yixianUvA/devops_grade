@@ -39,16 +39,16 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
   /student/:
     get:
-      summary: "Find student by last name"
+      summary: "Get a student by properties"
       description: "Returns a single student"
-      operationId: "get_student_by_last_name"
+      operationId: "get_student"
       produces:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "last_name"
-        in: "query"
-        description: "The last name"
+      - in: "query"
+        name: "last_name"
+        description: "Last name to query on"
         required: true
         type: "string"
       responses:
@@ -127,12 +127,10 @@ definitions:
         type: "string"
       grades:
         type: "object"
-        additionalProperties:
-          type: "object"
-          properties: {}
+        additionalProperties: {}
     example:
       student_id: 0
       last_name: "last_name"
       grades:
-        key: "{}"
+        key: ""
       first_name: "first_name"
