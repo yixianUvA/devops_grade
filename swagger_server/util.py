@@ -6,15 +6,12 @@ import typing
 
 def _deserialize(data, klass):
     """Deserializes dict, list, str into an object.
-
     :param data: dict, list or str.
     :param klass: class literal, or string of class name.
-
     :return: object.
     """
     if data is None:
         return None
-
     if klass in six.integer_types or klass in (float, str, bool):
         return _deserialize_primitive(data, klass)
     elif klass == object:
@@ -30,6 +27,7 @@ def _deserialize(data, klass):
             return _deserialize_dict(data, klass.__args__[1])
     else:
         return deserialize_model(data, klass)
+    return data
 
 
 def _deserialize_primitive(data, klass):
@@ -107,8 +105,11 @@ def deserialize_model(data, klass):
         if data is not None \
                 and instance.attribute_map[attr] in data \
                 and isinstance(data, (list, dict)):
+
             value = data[instance.attribute_map[attr]]
             setattr(instance, attr, _deserialize(value, attr_type))
+        else:
+            setattr(instance, attr, None)
 
     return instance
 

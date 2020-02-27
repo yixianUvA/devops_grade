@@ -3,7 +3,7 @@ import six
 
 from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
-from swagger_server import student_service
+from swagger_server.service import student_service
 
 
 def add_student(body):  # noqa: E501
@@ -17,7 +17,10 @@ def add_student(body):  # noqa: E501
     :rtype: str
     """
     if connexion.request.is_json:
-        body = Student.from_dict(connexion.request.get_json())  # noqa: E501
+        try:
+            body = Student.from_dict(connexion.request.get_json())  # noqa: E501
+        except ValueError:
+            return 'Invalid Input', 405
     return student_service.add_student(body)
 
 
@@ -54,3 +57,17 @@ def get_student_by_id(student_id, subject=None):  # noqa: E501
         return res
     return 'Not Found', 404
 
+def get_student_by_last_name(last_name):  # noqa: E501
+    """Find student by last name
+
+    Returns a single student # noqa: E501
+
+    :param last_name: The last name to search for
+    :type last_name: str
+
+    :rtype: Student
+    """
+    res = student_service.get_student_by_last_name(last_name)
+    if res:
+        return res
+    return 'Not Found', 404

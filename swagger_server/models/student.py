@@ -15,11 +15,11 @@ class Student(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, student_id: int=None, first_name: str=None, last_name: str=None, grades: Dict[str, float]=None):  # noqa: E501
+    def __init__(self, student_name: int=None, first_name: str=None, last_name: str=None, grades: Dict[str, float]=None):  # noqa: E501
         """Student - a model defined in Swagger
 
-        :param student_id: The student_id of this Student.  # noqa: E501
-        :type student_id: int
+        :param student_name: The student_name of this Student.  # noqa: E501
+        :type student_name: int
         :param first_name: The first_name of this Student.  # noqa: E501
         :type first_name: str
         :param last_name: The last_name of this Student.  # noqa: E501
@@ -28,20 +28,20 @@ class Student(Model):
         :type grades: Dict[str, float]
         """
         self.swagger_types = {
-            'student_id': int,
+            'student_name': int,
             'first_name': str,
             'last_name': str,
             'grades': Dict[str, float]
         }
 
         self.attribute_map = {
-            'student_id': 'student_id',
+            'student_name': 'student_name',
             'first_name': 'first_name',
             'last_name': 'last_name',
             'grades': 'grades'
         }
 
-        self._student_id = student_id
+        self._student_name = student_name
         self._first_name = first_name
         self._last_name = last_name
         self._grades = grades
@@ -58,25 +58,25 @@ class Student(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def student_id(self) -> int:
-        """Gets the student_id of this Student.
+    def student_name(self) -> int:
+        """Gets the student_name of this Student.
 
 
-        :return: The student_id of this Student.
+        :return: The student_name of this Student.
         :rtype: int
         """
-        return self._student_id
+        return self._student_name
 
-    @student_id.setter
-    def student_id(self, student_id: int):
-        """Sets the student_id of this Student.
+    @student_name.setter
+    def student_name(self, student_name: int):
+        """Sets the student_name of this Student.
 
 
-        :param student_id: The student_id of this Student.
-        :type student_id: int
+        :param student_name: The student_name of this Student.
+        :type student_name: int
         """
 
-        self._student_id = student_id
+        self._student_name = student_name
 
     @property
     def first_name(self) -> str:
@@ -96,6 +96,8 @@ class Student(Model):
         :param first_name: The first_name of this Student.
         :type first_name: str
         """
+        if first_name is None:
+            raise ValueError("Invalid value for `first_name`, must not be `None`")  # noqa: E501
 
         self._first_name = first_name
 
@@ -117,6 +119,8 @@ class Student(Model):
         :param last_name: The last_name of this Student.
         :type last_name: str
         """
+        if last_name is None:
+            raise ValueError("Invalid value for `last_name`, must not be `None`")  # noqa: E501
 
         self._last_name = last_name
 
