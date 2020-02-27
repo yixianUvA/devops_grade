@@ -48,7 +48,7 @@ class TestDefaultController(BaseTestCase):
         #     method='DELETE')
         # self.assert200(response,
         #                'Response body is : ' + response.data.decode('utf-8'))
-        # 
+        #
         # response = self.client.open(
         #     '/service-api/student/{student_id}'.format(student_id=-1),
         #     method='DELETE')
