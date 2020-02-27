@@ -6,12 +6,15 @@ import typing
 
 def _deserialize(data, klass):
     """Deserializes dict, list, str into an object.
+
     :param data: dict, list or str.
     :param klass: class literal, or string of class name.
+
     :return: object.
     """
     if data is None:
         return None
+
     if klass in six.integer_types or klass in (float, str, bool):
         return _deserialize_primitive(data, klass)
     elif klass == object:
