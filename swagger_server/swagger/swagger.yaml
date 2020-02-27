@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Swagger tutorial"
   version: "1.0.0"
-  title: "DevOps assignment 02- Swagger"
+  title: "Swagger tutorial"
 basePath: "/service-api"
 schemes:
 - "http"
@@ -68,6 +68,7 @@ paths:
           description: "student not found"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
     delete:
+      summary: "Delete student by ID"
       description: ""
       operationId: "delete_student"
       produces:
@@ -76,7 +77,7 @@ paths:
       parameters:
       - name: "student_id"
         in: "path"
-        description: "ID of student"
+        description: "ID of student to delete"
         required: true
         type: "integer"
         format: "int64"
@@ -90,23 +91,46 @@ paths:
         "404":
           description: "student not found"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /student/:
+    get:
+      summary: "Find student by Last Name"
+      description: "Returns a single student"
+      operationId: "get_student_by_last_name"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "last_name"
+        in: "query"
+        description: "Last name of student to return"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Student"
+        "400":
+          description: "Invalid Last name supplied"
+        "404":
+          description: "student not found"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
   Student:
     type: "object"
     properties:
       student_id:
         type: "integer"
+        format: "int64"
       first_name:
         type: "string"
       last_name:
         type: "string"
       grades:
         type: "object"
-        additionalProperties:
-          type: "integer"
+        properties: {}
     example:
       student_id: 0
       last_name: "last_name"
-      grades:
-        key: 6
+      grades: "{}"
       first_name: "first_name"
